@@ -2,13 +2,14 @@
 #include "Dic.h"
 #include "test.h"
 
+
 using namespace std;
 
 void testDic()
 {
     Dic* dic = new Dic();
     dic->sortLists();
-    List* list = dic->getListByTerm("a");
+    auto list = dic->getListByTerm("a");
     if(list != NULL)
         cout << "Error!" << endl;
     dic->addList("a");
@@ -43,17 +44,17 @@ void testList()
         cout << "Error!" << endl;
     if(list->getLength() != 0)
         cout << "Error!" << endl;
-    list->addPosting("1");
-    list->addPosting("2");
-    list->addPosting("3");
+    list->addPosting(1);
+    list->addPosting(2);
+    list->addPosting(3);
     Posting *posting = list->getPostings();
-    if(posting->getDocId() != "1")
+    if(posting->getDocId() != 1)
         cout << "Error!" << endl;
     posting = posting->next;
-    if(posting->getDocId() != "2")
+    if(posting->getDocId() != 2)
         cout << "Error!" << endl;
     posting = posting->next;
-    if(posting->getDocId() != "3")
+    if(posting->getDocId() != 3)
         cout << "Error!" << endl;
     posting = posting->next;
     if(posting != NULL)

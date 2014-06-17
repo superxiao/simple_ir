@@ -12,9 +12,9 @@ private:
     Posting* last;
 public:
     List(string term);
-    string getTerm();
+    string getTerm() const;
     int getLength();
-    void addPosting(string docId);
+    void addPosting(int docId);
     Posting* getPostings();
 };
 #endif

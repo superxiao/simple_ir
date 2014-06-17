@@ -18,7 +18,7 @@ bool compareLists(List list1, List list2)
     return (list1.getTerm() < list2.getTerm());
 }
 
-List* Dic::getListByTerm(string term)
+shared_ptr<List> Dic::getListByTerm(string term)
 {
     if(!sorted)
     {
@@ -29,13 +29,19 @@ List* Dic::getListByTerm(string term)
     // Binary search
     auto results = equal_range(lists.begin(), lists.end(), searchFor, compareLists);
     if(results.first != lists.end())
-        return &(*results.first);
+        return shared_ptr<List>(&(*results.first));
     return NULL;
 }
 
 void Dic::addList(string term)
 {
     List list(term);
+    this->lists.push_back(list);
+    sorted = false;
+}
+
+void Dic::addList(string term, List list)
+{
     this->lists.push_back(list);
     sorted = false;
 }

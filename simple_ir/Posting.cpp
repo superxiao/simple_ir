@@ -3,7 +3,7 @@
 #include<string>
 #include"Posting.h"
 using namespace std;
-Posting::Posting(string docId, int fq)
+Posting::Posting(int docId, int fq)
 {
     this->docId = docId;
     this->fq = fq;
@@ -15,7 +15,7 @@ int Posting::freq()
     return fq;
 }
 
-string Posting::getDocId()
+int Posting::getDocId()
 {
     return docId;
 }

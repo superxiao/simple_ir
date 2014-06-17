@@ -24,8 +24,9 @@ int List::getLength()
     return length;
 }
 
-void List::addPosting(string docId)
+void List::addPosting(int docId)
 {
+    // Assume docId are added in increasing order
     // TODO: frequency currently set to 0
     Posting* posting = new Posting(docId, 0);
     if(head == NULL)
@@ -36,9 +37,14 @@ void List::addPosting(string docId)
     }
     else
     {
-        last->next = posting;
-        last = last->next;
-        length ++;
+        // Because docId are added in increasing order we only need to asure
+        // last docId in list doesn't equal to the one we are adding.
+        if(last->getDocId() != docId)
+        {
+            last->next = posting;
+            last = last->next;
+            length ++;
+        }
     }
 }
 

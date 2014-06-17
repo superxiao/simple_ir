@@ -8,12 +8,12 @@ class Posting
 {
 private:
     int fq;//频率
-    string docId;
+    int docId;
 
 public:
-    Posting(string docId, int fq);
+    Posting(int docId, int fq);
     Posting* next;
-    string getDocId();
+    int getDocId();
     int freq();//得到频率
 };
 #endif

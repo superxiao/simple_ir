@@ -40,7 +40,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ReferencePath>$(ReferencePath)</ReferencePath>
-    <IncludePath>E:\boost_1_55_0;$(IncludePath)</IncludePath>
+    <IncludePath>E:\local\boost_1_55_0;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\local\boost_1_55_0\lib32-msvc-11.0;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -66,6 +67,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Dic.cpp" />
+    <ClCompile Include="IndexConstructor.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Posting.cpp" />
@@ -74,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dic.h" />
+    <ClInclude Include="IndexConstructor.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Posting.h" />
     <ClInclude Include="test.h" />
