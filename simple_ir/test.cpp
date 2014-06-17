@@ -7,15 +7,18 @@ using namespace std;
 void testDic()
 {
     Dic* dic = new Dic();
+    dic->sortLists();
     List* list = dic->getListByTerm("a");
     if(list != NULL)
         cout << "Error!" << endl;
     dic->addList("a");
+    dic->sortLists();
     list = dic->getListByTerm("a");
     if(list->getTerm() != "a")
         cout << "Error!" << endl;
     dic->addList("b");
     dic->addList("c");
+    dic->sortLists();
     list = dic->getListByTerm("a");
     if(list->getTerm() != "a")
         cout << "Error!" << endl;
@@ -35,6 +38,7 @@ void testDic()
 void testList()
 {
     List *list = new List("a");
+    
     if(list->getTerm() != "a")
         cout << "Error!" << endl;
     if(list->getLength() != 0)
@@ -53,6 +57,8 @@ void testList()
         cout << "Error!" << endl;
     posting = posting->next;
     if(posting != NULL)
+        cout << "Error!" << endl;
+    if(list->getLength() != 3)
         cout << "Error!" << endl;
     cout << "If no error, then success!" << endl;
 }

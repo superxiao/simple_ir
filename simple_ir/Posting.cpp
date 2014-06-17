@@ -9,6 +9,7 @@ Posting::Posting(string docId, int fq)
     this->fq = fq;
     next=NULL;
 }
+
 int Posting::freq()
 {
     return fq;

@@ -3,26 +3,33 @@
 #include<cstring>
 #include<iostream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
 Dic::Dic()
 {
     this->lists = vector<List>();
+    sorted = false;
+}
+
+bool compareLists(List list1, List list2)
+{
+    return (list1.getTerm() < list2.getTerm());
 }
 
 List* Dic::getListByTerm(string term)
 {
-    // Should only allow this operation when we have the list sorted by term.
-    // In that case we can do a binary search.
-    // Currently we do a linear search.
-    for(vector<List>::iterator list = lists.begin(); list != lists.end(); list++)
+    if(!sorted)
     {
-        if(list->getTerm() == term)
-        {
-            return &(*list);
-        }
+        cout << "Lists not sorted yet!" << endl;
+        return NULL;
     }
+    List searchFor(term);
+    // Binary search
+    auto results = equal_range(lists.begin(), lists.end(), searchFor, compareLists);
+    if(results.first != lists.end())
+        return &(*results.first);
     return NULL;
 }
 
@@ -30,4 +37,12 @@ void Dic::addList(string term)
 {
     List list(term);
     this->lists.push_back(list);
+    sorted = false;
+}
+
+
+void Dic::sortLists()
+{
+    sort(lists.begin(), lists.end(), compareLists);
+    sorted = true;
 }

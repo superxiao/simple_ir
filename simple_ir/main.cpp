@@ -9,7 +9,7 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    testList();
+    testDic();
 
     //TokenReader::readAndLowerTokensFromFile("../Reuters/10.html");
 

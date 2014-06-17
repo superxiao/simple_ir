@@ -13,7 +13,7 @@ List::List(string term)
     this->term = term;
 }
 
-string List::getTerm()
+string List::getTerm() const
 {
     return term;
 }
