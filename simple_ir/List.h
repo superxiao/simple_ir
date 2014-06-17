@@ -4,13 +4,16 @@ class List
 {
 private:
     char name[20];
-    double listSum;
-    Term* head;
-    List*next;
+    double PostingSum;
+    Posting* head;
 public:
+    List(char*);
+    List*left;
+    List*right;
     char* name();
-    double listSum();
+    double PostingSum();
     bool addTerm(char*);
-    Term* getTerms();
+    Posting* getTerms();
+    Posting* has(char*);
 };
 #endif

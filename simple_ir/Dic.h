@@ -8,9 +8,11 @@ private:
     List* head;
     double listSum;
 public:
+    Dic();
     double listSum();
     List* has(char*);
     List* getListByName(char*);
     bool addList(char*);
+    List* insert(List*,char*);
 };
 #endif
