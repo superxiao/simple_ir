@@ -4,100 +4,48 @@
 #include"List.h"
 #include"Posting.h"
 using namespace std;
-List::List(char*n)
+
+List::List(string term)
 {
-    PostingSum=0;
+    this->length = 0;
     head=NULL;
-    strcpy(name,n);
-    left=NULL;
-    right=NULL;
+    last = NULL;
+    this->term = term;
 }
 
-char* List::name()
+string List::getTerm()
 {
-    return name;
+    return term;
 }
 
-Posting* has(char*name)
+
+int List::getLength()
 {
-    Posting* tmp;
-    tmp=head;
-    if(head==NULL)
-        return NULL;
-    while(tmp)
+    return length;
+}
+
+void List::addPosting(string docId)
+{
+    // TODO: frequency currently set to 0
+    Posting* posting = new Posting(docId, 0);
+    if(head == NULL)
     {
-        if(!strcmp(tmp->name,name))
-            return tmp;
-        tmp=tmp->next;
-    }
-    return NULL;
-}
-
-double List::PostingSum()
-{
-    return PostingSum;
-}
-
-bool List::addTerm(char* name)
-{
-    Posting* tmp;
-    if(tmp=this->has(name))
-    {
-        tmp->fq++;
+        head = posting;
+        last = posting;
+        length = 1;
     }
     else
     {
-        //如果在链接表中没有记录或者记录应该在head之前
-        if(head==NULL||strcmp(head->name,name)>0)
-        {
-            tmp=new Posting(name);
-            tmp->next=head;
-            head=tmp;
-            return true;
-        }
-        tmp=head;
-        while(tmp)
-        {
-            //如果不是最后一条记录
-            if(tmp->next)
-            {
-                if(strcmp(tmp->next->name,name)>0)
-                {
-                    Posting*t=new Posting(name);
-                    t->next=tmp->next;
-                    tmp->next=t;
-                    return true;
-                }
-                else
-                {
-                    tmp=tmp->next;
-                }
-            }
-            else    //是最后一条记录
-            {
-                if(strcmp(tmp->name,name)<0)
-                {
-                    Posting*t=new Posting(name);
-                    tmp->next=t;
-                    return true;
-                }
-                else
-                {
-                    Posting*t=new Posting(name);
-                    tmp->next=t;
-                    return true;
-                }
-            }
-        }
+        last->next = posting;
+        last = last->next;
+        length ++;
     }
 }
 
-
-
-Posting* List::getTerms()
+Posting* List::getPostings()
 {
     return head;
 }
 
-        
+
 

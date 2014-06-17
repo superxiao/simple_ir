@@ -65,11 +65,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Dic.cpp" />
+    <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Posting.cpp" />
+    <ClCompile Include="test.cpp" />
     <ClCompile Include="TokenReader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dic.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="Posting.h" />
+    <ClInclude Include="test.h" />
     <ClInclude Include="TokenReader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

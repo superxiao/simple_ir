@@ -1,15 +1,19 @@
 #include <iostream>
 #include "TokenReader.h"
+#include "Dic.h"
+#include "test.h"
 
 using namespace std;
 
+
+
 int main(int argc, char** argv)
 {
-  
-  
-  TokenReader::readAndLowerTokensFromFile("../Reuters/10.html");
+    testList();
 
-  int i;
-  cin >> i;
-  return 0;
+    //TokenReader::readAndLowerTokensFromFile("../Reuters/10.html");
+
+    int i;
+    cin >> i;
+    return 0;
 }

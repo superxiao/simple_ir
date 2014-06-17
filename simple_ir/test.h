@@ -1,0 +1,2 @@
+void testDic();
+void testList();

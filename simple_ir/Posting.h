@@ -1,14 +1,19 @@
 #ifndef POSTING_H
 #define POSTING_H
+
+#include <string>
+using namespace std;
+
 class Posting
 {
 private:
-    char name[20];
-    double fq;//频率
+    int fq;//频率
+    string docId;
+
 public:
-    Posting(char*);
+    Posting(string docId, int fq);
     Posting* next;
-    double freq();//得到频率
-    char* name();
+    string getDocId();
+    int freq();//得到频率
 };
 #endif

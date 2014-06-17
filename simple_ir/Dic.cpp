@@ -2,64 +2,32 @@
 #include<string>
 #include<cstring>
 #include<iostream>
+#include <string>
+
 using namespace std;
+
 Dic::Dic()
 {
-    this->head=NULL;
-    this->listSum=0;
-}
-double Dic::listSum()
-{
-    return this->listSum;
+    this->lists = vector<List>();
 }
 
-List* Dic::has(char*name)
+List* Dic::getListByTerm(string term)
 {
-    List* tmp;
-    tmp=head;
-    while(tmp)
+    // Should only allow this operation when we have the list sorted by term.
+    // In that case we can do a binary search.
+    // Currently we do a linear search.
+    for(vector<List>::iterator list = lists.begin(); list != lists.end(); list++)
     {
-        if(!strcmp(tmp->name,name))
+        if(list->getTerm() == term)
         {
-            return tmp;
+            return &(*list);
         }
-        tmp=tmp->next(name);
     }
     return NULL;
 }
 
-
-List* Dic::getListByName(char*name)
+void Dic::addList(string term)
 {
-    List* tmp;
-    if(tmp=this->has(name))
-        return tmp;
-    else
-        return NULL;
+    List list(term);
+    this->lists.push_back(list);
 }
-
-bool Dic::addList(char* name)
-{
-   
-   head=this->insert(head,name);
-   listSum++;
-}
-
-//插入到二叉树中，返回插入后的根节点
-List*  Dic::insert(List* list,char* name)
-{
-   if(list==NULL)
-       return  new List(name);
-    else
-    {   //二叉树结构的字典
-        //找到要插入的地方，然后把新的词项插入进去;
-       if(strcmp(list->name,name)>0)
-            list->left=insert(list->left,name);
-        else
-            list->right=insert(list->right,name);
-    }
-    return head;
-}
-
-    
-    

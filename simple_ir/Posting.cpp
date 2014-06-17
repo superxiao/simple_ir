@@ -3,17 +3,18 @@
 #include<string>
 #include"Posting.h"
 using namespace std;
-Posting::Posting(char*n)
+Posting::Posting(string docId, int fq)
 {
-    strcpy(name,n);
-    fq=1;
+    this->docId = docId;
+    this->fq = fq;
     next=NULL;
 }
-double Posting::freq()
+int Posting::freq()
 {
     return fq;
 }
-char* Posting::name()
+
+string Posting::getDocId()
 {
-    return name;
+    return docId;
 }
