@@ -1,10 +1,14 @@
 #include <iostream>
+#include "TokenReader.h"
 
 using namespace std;
 
 int main(int argc, char** argv)
 {
-  cout << "Hello World!" << endl;
+  
+  
+  TokenReader::readAndLowerTokensFromFile("../Reuters/10.html");
+
   int i;
   cin >> i;
   return 0;
