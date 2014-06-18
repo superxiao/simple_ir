@@ -47,7 +47,7 @@ void testList()
     list->addPosting(1);
     list->addPosting(2);
     list->addPosting(3);
-    Posting *posting = list->getPostings();
+    shared_ptr<Posting> posting = list->getPostings();
     if(posting->getDocId() != 1)
         cout << "Error!" << endl;
     posting = posting->next;

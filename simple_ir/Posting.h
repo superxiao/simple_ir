@@ -2,6 +2,8 @@
 #define POSTING_H
 
 #include <string>
+#include <memory>
+
 using namespace std;
 
 class Posting
@@ -12,7 +14,7 @@ private:
 
 public:
     Posting(int docId, int fq);
-    Posting* next;
+    shared_ptr<Posting> next;
     int getDocId();
     int freq();//得到频率
 };

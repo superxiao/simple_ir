@@ -16,8 +16,12 @@ private:
 public:
     Dic();
     shared_ptr<List> getListByTerm(string term);
+    typedef vector<List>::iterator list_iterator;
     void addList(string term);
     void addList(string term, List list);
+    void setSorted(bool);
+    list_iterator begin();
+    list_iterator end();
     void sortLists();
 };
 #endif

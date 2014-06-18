@@ -43,6 +43,11 @@
     <IncludePath>E:\local\boost_1_55_0;$(IncludePath)</IncludePath>
     <LibraryPath>E:\local\boost_1_55_0\lib32-msvc-11.0;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>E:\local\boost_1_55_0;$(IncludePath)</IncludePath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+    <LibraryPath>E:\local\boost_1_55_0\lib32-msvc-11.0;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -68,6 +73,7 @@
   <ItemGroup>
     <ClCompile Include="Dic.cpp" />
     <ClCompile Include="IndexConstructor.cpp" />
+    <ClCompile Include="IndexPersister.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Posting.cpp" />
@@ -77,6 +83,7 @@
   <ItemGroup>
     <ClInclude Include="Dic.h" />
     <ClInclude Include="IndexConstructor.h" />
+    <ClInclude Include="IndexPersister.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Posting.h" />
     <ClInclude Include="test.h" />

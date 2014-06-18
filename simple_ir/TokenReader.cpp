@@ -12,7 +12,7 @@ TokenReader::TokenReader(void)
 {
 }
 
-vector<string> TokenReader::readTokensFromFile(string fileName)
+vector<string> TokenReader::readAndLowerTokensFromFile(string fileName)
 {
     vector<string> tokens;
     ifstream file;
@@ -28,20 +28,10 @@ vector<string> TokenReader::readTokensFromFile(string fileName)
         string token;
         tokenizer<> tok(line);
         for(tokenizer<>::iterator i=tok.begin(); i!=tok.end();++i) {
-            tokens.push_back(*i);
+            token = *i;
+            to_lower(token);
+            tokens.push_back(token);
         }
-    }
-    file.close();
-    return tokens;
-}
-
-vector<string> TokenReader::readAndLowerTokensFromFile(string fileName)
-{
-    vector<string> tokens = readTokensFromFile(fileName);
-    for(vector<string>::iterator i = tokens.begin(); i != tokens.end(); i++)
-    {
-        to_lower(*i);
-        cout << *i << endl;
     }
     return tokens;
 }

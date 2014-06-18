@@ -3,6 +3,8 @@
 #include<string>
 #include"List.h"
 #include"Posting.h"
+#include <memory>
+
 using namespace std;
 
 List::List(string term)
@@ -28,7 +30,7 @@ void List::addPosting(int docId)
 {
     // Assume docId are added in increasing order
     // TODO: frequency currently set to 0
-    Posting* posting = new Posting(docId, 0);
+    shared_ptr<Posting> posting(new Posting(docId, 0));
     if(head == NULL)
     {
         head = posting;
@@ -48,7 +50,7 @@ void List::addPosting(int docId)
     }
 }
 
-Posting* List::getPostings()
+shared_ptr<Posting> List::getPostings()
 {
     return head;
 }

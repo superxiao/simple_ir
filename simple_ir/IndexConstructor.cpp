@@ -23,14 +23,23 @@ static bool compareIntFileNames(string file1, string file2)
     return getFileId(file1) < getFileId(file2);
 }
 
-IndexConstructor::IndexConstructor(string folderName, int fileLimit)
+IndexConstructor::IndexConstructor()
+{
+}
+
+void IndexConstructor::getFilesPathsInFolder(string folder, int fileLimit)
 {
     // Currently we only deal with the Reuter files 
-    if ( !exists( folderName ) ) 
-        cout << "folder " << folderName << "doesn't exit!" << endl;
+    if ( !exists( folder ) ) 
+    {
+        cout << "folder " << folder << "doesn't exit!" << endl;
+        return;
+    }
     directory_iterator end_itr; 
     int i = 0;
-    for ( directory_iterator itr( folderName );
+    if(fileLimit == 0)
+        fileLimit = INT32_MAX;
+    for ( directory_iterator itr( folder );
         itr != end_itr && i != fileLimit;
         ++itr, ++i )
     {
@@ -41,10 +50,12 @@ IndexConstructor::IndexConstructor(string folderName, int fileLimit)
     }
     sort(files.begin(), files.end(), compareIntFileNames);
     cout << "Done getting all file names. " << files.size() << " files in total." << endl;
+    
 }
 
-shared_ptr<Dic> IndexConstructor::constructIndex()
+shared_ptr<Dic> IndexConstructor::constructIndex(string folder, int fileLimit)
 {
+    getFilesPathsInFolder(folder, fileLimit);
     unordered_map<string ,List> hash;
     for(auto file = files.begin(); file != files.end(); file++)
     {

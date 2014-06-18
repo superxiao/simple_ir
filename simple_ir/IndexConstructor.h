@@ -9,9 +9,10 @@ class IndexConstructor
 {
 private:
     vector<string> files;
+    void getFilesPathsInFolder(string folder, int fileLimit);
 public:
-    IndexConstructor(string folderName, int fileLimit);
-    shared_ptr<Dic> constructIndex();
+    IndexConstructor();
+    shared_ptr<Dic> constructIndex(string folder, int fileLimit);
     ~IndexConstructor(void);
 };
 

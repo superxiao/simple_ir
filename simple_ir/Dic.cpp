@@ -52,3 +52,18 @@ void Dic::sortLists()
     sort(lists.begin(), lists.end(), compareLists);
     sorted = true;
 }
+
+void Dic::setSorted(bool sorted)
+{
+    this->sorted = sorted;
+}
+
+Dic::list_iterator Dic::begin()
+{
+    return lists.begin();
+}
+
+Dic::list_iterator Dic::end()
+{
+    return lists.end();
+}
