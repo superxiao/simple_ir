@@ -9,7 +9,6 @@ class IndexConstructor
 {
 private:
     vector<string> files;
-    int getFileId(string fileName);
 public:
     IndexConstructor(string folderName, int fileLimit);
     shared_ptr<Dic> constructIndex();
