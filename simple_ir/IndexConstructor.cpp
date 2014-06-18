@@ -55,6 +55,7 @@ void IndexConstructor::getFilesPathsInFolder(string folder, int fileLimit)
 
 shared_ptr<Dic> IndexConstructor::constructIndex(string folder, int fileLimit)
 {
+    cout << "Reading files' info in folder..." << endl;
     getFilesPathsInFolder(folder, fileLimit);
     unordered_map<string ,List> hash;
     for(auto file = files.begin(); file != files.end(); file++)

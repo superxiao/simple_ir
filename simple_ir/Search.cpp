@@ -30,12 +30,12 @@ List* Search::getTmpList(const Query& tq, shared_ptr<Dic> d)
         List* l=d->getListByTerm(string(q->getName()));
         return l;
     }
-    if(q->next->getName() == "OR") 
+    if(q->next->getName() == "or") 
     {
         
         return getOrList(getTmpList(Query(q->getName()), d),getTmpList(*(q->next->next), d));  
     }
-    else if(q->next->getName() == "AND")
+    else if(q->next->getName() == "and")
         return getAndList(getTmpList(Query(q->getName()), d),getTmpList(*(q->next->next), d));
     else  
     {

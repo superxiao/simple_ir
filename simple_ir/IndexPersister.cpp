@@ -8,6 +8,7 @@ IndexPersister::IndexPersister()
 
 void IndexPersister::saveIndexToFile(shared_ptr<Dic> index, string termFile, string postingsFile)
 {
+    cout << "Saving index to disk.." << endl;
     ofstream termStream(termFile, std::ios::binary);
     ofstream postingsStream(postingsFile, std::ios::binary);
     for(Dic::list_iterator list = index->begin(); list != index->end(); list++)
@@ -35,6 +36,7 @@ void IndexPersister::saveIndexToFile(shared_ptr<Dic> index, string termFile, str
 
 shared_ptr<Dic> IndexPersister::readIndexFromFile(string termFile, string postingsFile)
 {
+    cout << "Reading index from disk.." << endl;
     ifstream termStream(termFile, ios::binary);
     ifstream postingsStream(postingsFile,ios::binary);
     shared_ptr<Dic> dic(new Dic());

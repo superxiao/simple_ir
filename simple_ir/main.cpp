@@ -1,4 +1,6 @@
 #include <iostream>
+#include <boost/filesystem.hpp>
+#include <sstream>
 #include "TokenReader.h"
 #include "Dic.h"
 #include "test.h"
@@ -7,38 +9,73 @@
 #include "Query.h"
 #include "Search.h"
 using namespace std;
-
+using namespace boost::filesystem;
 
 
 int main(int argc, char** argv)
 {
     //testDic();
-    IndexConstructor constructor;
-   // auto dic = constructor.constructIndex("../Reuters", 0);
-
+    cout << "Usage:\n" << "construct <folder>: construct index\n" 
+        << "s <search string>: search string from index\n" << endl;
+    string line;
+    shared_ptr<Dic> dic = NULL;
     IndexPersister store;
-    //store.saveIndexToFile(dic, "../term", "../postings");
-    auto dic = store.readIndexFromFile("../term", "../postings");
-
-    string term("commercial OR reason");
-    cout << "Search for term " << term << endl;
-    auto query = Query::makeQueryList(term);
-    Search search(*query);
-    auto list = search.exec(dic);
-    if(list != NULL)
+    while(true)
     {
-        shared_ptr<Posting> posting = list->getPostings();
-        while(posting != NULL)
+        cout << ">>";
+        getline(cin, line);
+        stringstream stream(line);
+        string token;
+        stream >> token;
+        if(token == "construct")
         {
-            cout << posting->getDocId() << endl;
-            posting = posting->next;
+            string folder;
+            stream >> folder;
+            IndexConstructor constructor;
+            if(!exists(folder))
+            {
+                cout << "Folder doesn't exist." << endl;
+                continue;
+            }
+            dic = constructor.constructIndex(folder, 0);
+            store.saveIndexToFile(dic, "term", "postings");
+        }
+        else if(token == "s")
+        {
+            if(dic == NULL)
+            {
+                if(!exists("term") || !exists("postings"))
+                {
+                    cout << "Construct index first!" << endl;
+                    continue;
+                }
+                dic = store.readIndexFromFile("term", "postings");
+            }
+            string queryStr;
+            getline(stream, queryStr);
+            cout << "Search for query " << queryStr << endl;
+            auto query = Query::makeQueryList(queryStr);
+            Search search(*query);
+            auto list = search.exec(dic);
+            if(list != NULL)
+            {
+                shared_ptr<Posting> posting = list->getPostings();
+                while(posting != NULL)
+                {
+                    cout << posting->getDocId() << endl;
+                    posting = posting->next;
+                }
+            }
+            else
+            {
+                cout << "Not found!" << endl;
+            }
+        }
+        else
+        {
+            cout << "Invalid command." << endl;
         }
     }
-    else
-    {
-        cout << "Not found!" << endl;
-    }
-    //TokenReader::readAndLowerTokensFromFile("../Reuters/10.html");
 
     int i;
     cin >> i;

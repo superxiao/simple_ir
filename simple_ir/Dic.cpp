@@ -27,9 +27,9 @@ List* Dic::getListByTerm(string term)
     }
     List searchFor(term);
     // Binary search
-    auto Lists = equal_range(lists.begin(), lists.end(), searchFor, compareLists);
-    if(Lists.first != lists.end())
-        return &(*Lists.first);
+    auto result = equal_range(lists.begin(), lists.end(), searchFor, compareLists);
+    if(result.first != result.second)
+        return &(*result.first);
     return NULL;
 }
 

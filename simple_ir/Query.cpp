@@ -24,7 +24,7 @@ std::shared_ptr<Query> Query::makeQueryList(string q)
 {
     //把一条查询语句a b AND c转化为Query链表
     //每一个query中都是一个单词 a
-    
+    to_lower(q);
     int i=0;
     std::shared_ptr<Query> last=NULL;
     std::shared_ptr<Query> head=NULL;
