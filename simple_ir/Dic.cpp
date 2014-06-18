@@ -18,7 +18,7 @@ bool compareLists(List list1, List list2)
     return (list1.getTerm() < list2.getTerm());
 }
 
-shared_ptr<List> Dic::getListByTerm(string term)
+List* Dic::getListByTerm(string term)
 {
     if(!sorted)
     {
@@ -27,9 +27,9 @@ shared_ptr<List> Dic::getListByTerm(string term)
     }
     List searchFor(term);
     // Binary search
-    auto results = equal_range(lists.begin(), lists.end(), searchFor, compareLists);
-    if(results.first != lists.end())
-        return shared_ptr<List>(&(*results.first));
+    auto Lists = equal_range(lists.begin(), lists.end(), searchFor, compareLists);
+    if(Lists.first != lists.end())
+        return &(*Lists.first);
     return NULL;
 }
 

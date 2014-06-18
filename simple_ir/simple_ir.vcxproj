@@ -77,6 +77,8 @@
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Posting.cpp" />
+    <ClCompile Include="Query.cpp" />
+    <ClCompile Include="Search.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="TokenReader.cpp" />
   </ItemGroup>
@@ -86,6 +88,8 @@
     <ClInclude Include="IndexPersister.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Posting.h" />
+    <ClInclude Include="Query.h" />
+    <ClInclude Include="Search.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="TokenReader.h" />
   </ItemGroup>

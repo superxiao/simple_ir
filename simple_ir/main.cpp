@@ -4,6 +4,8 @@
 #include "test.h"
 #include "IndexConstructor.h"
 #include "IndexPersister.h"
+#include "Query.h"
+#include "Search.h"
 using namespace std;
 
 
@@ -18,9 +20,11 @@ int main(int argc, char** argv)
     //store.saveIndexToFile(dic, "../term", "../postings");
     auto dic = store.readIndexFromFile("../term", "../postings");
 
-    string term("commercial");
+    string term("commercial OR reason");
     cout << "Search for term " << term << endl;
-    auto list = dic->getListByTerm(term);
+    auto query = Query::makeQueryList(term);
+    Search search(*query);
+    auto list = search.exec(dic);
     if(list != NULL)
     {
         shared_ptr<Posting> posting = list->getPostings();
