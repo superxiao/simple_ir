@@ -14,10 +14,10 @@ class Search
     Query q2;
     List* getOrList(List*,List*);
     List* getAndList(List*,List*);
-    List* getTmpList(const Query&, shared_ptr<Dic> d);
+    List* getTmpList(const Query& tq, shared_ptr<Dic> d, shared_ptr<Dic> twoGram);
 public:
     Search(Query);
-    List* exec(shared_ptr<Dic> d);
+    List* exec(shared_ptr<Dic> dic, shared_ptr<Dic> twoGram);
 };
 #endif
 
