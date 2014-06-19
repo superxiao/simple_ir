@@ -12,7 +12,22 @@ List::List(string term)
     this->length = 0;
     head=NULL;
     last = NULL;
+    otherSet = shared_ptr<set<string>>(new set<string>);
     this->term = term;
+}
+
+void List::addOther(string other)
+{
+    otherSet->insert(other);
+}
+
+shared_ptr<set<string>> List::getOthers()
+{
+    return otherSet;
+}
+int List::getOthersLength()
+{
+    return otherSet->size();
 }
 
 string List::getTerm() const

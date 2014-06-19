@@ -81,6 +81,7 @@
     <ClCompile Include="Search.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="TokenReader.cpp" />
+    <ClCompile Include="TwoGramIndexer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dic.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="Search.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="TokenReader.h" />
+    <ClInclude Include="TwoGramIndexer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

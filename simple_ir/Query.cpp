@@ -6,6 +6,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost\tokenizer.hpp>
 #include <memory>
+#include <boost/regex.hpp>
 
 using namespace std;
 using namespace boost;
@@ -25,11 +26,16 @@ std::shared_ptr<Query> Query::makeQueryList(string q)
     //把一条查询语句a b AND c转化为Query链表
     //每一个query中都是一个单词 a
     to_lower(q);
-    int i=0;
     std::shared_ptr<Query> last=NULL;
     std::shared_ptr<Query> head=NULL;
-    tokenizer<> tok(q);
-    for(tokenizer<>::iterator i=tok.begin(); i!=tok.end();++i) {
+    
+    boost::regex re("[\\s\\]\\[!\"#$%&'\\(\\)+,./:;<=>?@\\^_`{|}~-]+");
+    boost::sregex_token_iterator i(q.begin(), q.end(), re, -1);
+    boost::sregex_token_iterator j;
+
+    for(; i!=j;++i) {
+        if((*i) == "")
+            continue;
         if(head == NULL)
         {
             head = std::shared_ptr<Query>(new Query(*i));

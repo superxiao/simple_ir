@@ -10,6 +10,13 @@ Posting::Posting(int docId, int fq)
     next=NULL;
 }
 
+Posting::Posting(string other, int fq)
+{
+    this->other = other;
+    this->fq = fq;
+    next=NULL;
+}
+
 int Posting::freq()
 {
     return fq;
@@ -18,4 +25,9 @@ int Posting::freq()
 int Posting::getDocId()
 {
     return docId;
+}
+
+string Posting::getOther()
+{
+    return other;
 }

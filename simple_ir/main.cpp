@@ -8,9 +8,18 @@
 #include "IndexPersister.h"
 #include "Query.h"
 #include "Search.h"
+#include "TwoGramIndexer.h"
+
 using namespace std;
 using namespace boost::filesystem;
 
+void printSomeFileContent(string file)
+{
+    ifstream stream("../Reuters/" + file + ".html");
+    char buffer[100] = {0};
+    stream.read(buffer, 99);
+    cout << "\"" << buffer << "...." << "\"" << endl << endl;
+}
 
 int main(int argc, char** argv)
 {
@@ -19,6 +28,7 @@ int main(int argc, char** argv)
         << "s <search string>: search string from index\n" << endl;
     string line;
     shared_ptr<Dic> dic = NULL;
+    shared_ptr<Dic> twoGramIndex = NULL;
     IndexPersister store;
     while(true)
     {
@@ -56,13 +66,23 @@ int main(int argc, char** argv)
             cout << "Search for query " << queryStr << endl;
             auto query = Query::makeQueryList(queryStr);
             Search search(*query);
-            auto list = search.exec(dic);
+            if(twoGramIndex == NULL)
+            {
+                cout << "Reading 2-gram index from disk.." << endl;
+                twoGramIndex = TwoGramIndexer::readIndexFromFile("2gram_terms", "2gram_postings");
+            }
+            auto list = search.exec(dic, twoGramIndex);
             if(list != NULL)
             {
                 shared_ptr<Posting> posting = list->getPostings();
                 while(posting != NULL)
                 {
-                    cout << posting->getDocId() << endl;
+                    cout << posting->getDocId() << ".html" << endl;
+                    stringstream stream;
+                    stream << posting->getDocId();
+                    string fileName;
+                    stream >> fileName;
+                    printSomeFileContent(fileName);
                     posting = posting->next;
                 }
             }

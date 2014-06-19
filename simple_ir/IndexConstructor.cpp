@@ -5,6 +5,7 @@
 #include <memory>
 #include <unordered_map>
 #include <algorithm>
+#include "TwoGramIndexer.h"
 
 using namespace std;
 using namespace boost::filesystem;
@@ -57,6 +58,7 @@ shared_ptr<Dic> IndexConstructor::constructIndex(string folder, int fileLimit)
 {
     cout << "Reading files' info in folder..." << endl;
     getFilesPathsInFolder(folder, fileLimit);
+    TwoGramIndexer twoIndexer;
     unordered_map<string ,List> hash;
     for(auto file = files.begin(); file != files.end(); file++)
     {
@@ -73,8 +75,11 @@ shared_ptr<Dic> IndexConstructor::constructIndex(string folder, int fileLimit)
                 list = hash.find(*token);
             }
             list->second.addPosting(fileId);
+            twoIndexer.addToken(*token);
         }
     }
+    auto twoIndex = twoIndexer.constructCurrentGrams();
+    twoIndexer.saveIndexToFile(twoIndex, "2gram_terms", "2gram_postings");
     cout << "Sorting terms" << endl;
     shared_ptr<Dic> dic(new Dic());
     for(auto itr = hash.begin(); itr != hash.end(); itr++)
