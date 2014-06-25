@@ -12,12 +12,13 @@ class Search
 {
     Query* q;
     Query q2;
-    List* getOrList(List*,List*);
-    List* getAndList(List*,List*);
-    List* getTmpList(const Query& tq, shared_ptr<Dic> d, shared_ptr<Dic> twoGram);
+    unique_ptr<List> getOrList(unique_ptr<List>,unique_ptr<List>);
+    unique_ptr<List> getAndList(unique_ptr<List>,unique_ptr<List>);
+    unique_ptr<List> getTmpList(Query& tq, shared_ptr<Dic>& d, shared_ptr<Dic>& twoGram);
+    unique_ptr<List> PromptForWildcardSearchAndReturnResultsIfContinue(vector<string>& words, string& stringPart, shared_ptr<Dic>& d, shared_ptr<Dic>& twoGram);
 public:
     Search(Query);
-    List* exec(shared_ptr<Dic> dic, shared_ptr<Dic> twoGram);
+    unique_ptr<List> exec(shared_ptr<Dic> dic, shared_ptr<Dic> twoGram);
 };
 #endif
 

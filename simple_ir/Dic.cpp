@@ -18,7 +18,7 @@ bool compareLists(List list1, List list2)
     return (list1.getTerm() < list2.getTerm());
 }
 
-List* Dic::getListByTerm(string term)
+unique_ptr<List> Dic::getListByTerm(string term)
 {
     if(!sorted)
     {
@@ -29,7 +29,7 @@ List* Dic::getListByTerm(string term)
     // Binary search
     auto result = equal_range(lists.begin(), lists.end(), searchFor, compareLists);
     if(result.first != result.second)
-        return &(*result.first);
+        return unique_ptr<List>(new List(*result.first));
     return NULL;
 }
 

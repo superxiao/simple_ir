@@ -12,7 +12,7 @@ using namespace std;
 using namespace boost;
 Query::Query()
 {}
-const string Query::getName()const
+string& Query::getName()
 {
     return name;
 }

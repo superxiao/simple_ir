@@ -63,7 +63,6 @@ int main(int argc, char** argv)
             }
             string queryStr;
             getline(stream, queryStr);
-            cout << "Search for query " << queryStr << endl;
             auto query = Query::makeQueryList(queryStr);
             Search search(*query);
             if(twoGramIndex == NULL)
@@ -71,6 +70,7 @@ int main(int argc, char** argv)
                 cout << "Reading 2-gram index from disk.." << endl;
                 twoGramIndex = TwoGramIndexer::readIndexFromFile("2gram_terms", "2gram_postings");
             }
+            cout << "Search for query " << queryStr << endl;
             auto list = search.exec(dic, twoGramIndex);
             if(list != NULL)
             {
@@ -85,6 +85,7 @@ int main(int argc, char** argv)
                     printSomeFileContent(fileName);
                     posting = posting->next;
                 }
+                cout << "\nFound " << list->getLength() << " pages in total." << endl;
             }
             else
             {

@@ -10,7 +10,7 @@ public:
     Query();
     Query(string);
     std::shared_ptr<Query> next;
-   const string getName()const;
+    string& getName();
     static std::shared_ptr<Query> makeQueryList(string);
 };
 #endif

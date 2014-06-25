@@ -62,18 +62,20 @@ vector<string> TwoGramIndexer::searchForPrefix(shared_ptr<Dic> dic, string pre)
 {
     auto prefixTwoGrams = getTwoGrams(pre);
     prefixTwoGrams.pop_back();
-    shared_ptr<set<string>> result_set = NULL;
+
+    shared_ptr<vector<string>> result_set = NULL;
+
     for(auto itr = prefixTwoGrams.begin(); itr != prefixTwoGrams.end(); itr++)
     {
         auto terms = searchForTwoGram(dic, *itr);
         if(result_set == NULL)
         {
-            result_set = terms;
+            result_set = shared_ptr<vector<string>>(new vector<string>(terms->begin(), terms->end()));
             continue;
         }
-        vector<string> result(100000);
-        set_intersection(result_set->begin(), result_set->end(), terms->begin(), terms->end(), result.begin());
-        result_set = shared_ptr<set<string>>(new set<string>(result.begin(), result.end()));
+        vector<string> result(min(result_set->size(), terms->size()));
+        auto end = set_intersection(result_set->begin(), result_set->end(), terms->begin(), terms->end(), result.begin());
+        result_set = shared_ptr<vector<string>>(new vector<string>(result.begin(), end));
     }
     vector<string> true_results;
     for(auto itr = result_set->begin(); itr != result_set->end(); itr++)
@@ -90,18 +92,18 @@ vector<string> TwoGramIndexer::searchForPostfix(shared_ptr<Dic> dic, string post
 {
     auto postfixTwoGrams = getTwoGrams(post);
     postfixTwoGrams.erase(postfixTwoGrams.begin());
-    shared_ptr<set<string>> result_set = NULL;
+    shared_ptr<vector<string>> result_set = NULL;
     for(auto itr = postfixTwoGrams.begin(); itr != postfixTwoGrams.end(); itr++)
     {
         auto terms = searchForTwoGram(dic, *itr);
         if(result_set == NULL)
         {
-            result_set = terms;
+            result_set = shared_ptr<vector<string>>(new vector<string>(terms->begin(), terms->end()));
             continue;
         }
-        vector<string> result(100000);
-        set_intersection(result_set->begin(), result_set->end(), terms->begin(), terms->end(), result.begin());
-        result_set = shared_ptr<set<string>>(new set<string>(result.begin(), result.end()));
+        vector<string> result(min(result_set->size(), terms->size()));
+        auto end = set_intersection(result_set->begin(), result_set->end(), terms->begin(), terms->end(), result.begin());
+        result_set = shared_ptr<vector<string>>(new vector<string>(result.begin(), end));
     }
     vector<string> true_results;
     for(auto itr = result_set->begin(); itr != result_set->end(); itr++)
